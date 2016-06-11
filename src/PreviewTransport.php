@@ -59,6 +59,11 @@ class PreviewTransport extends Transport
 
         Session::put('mail_preview_path', basename($previewPath = $this->getPreviewFilePath($message)));
 
+        /*
+         * 2016/06/10 ToshihikoSato
+         * Next two sentences are disabled to supress creating ".html" file and ".eml" file.
+         */
+/*
         $this->files->put(
             $previewPath.'.html',
             $this->getHTMLPreviewContent($message)
@@ -67,6 +72,16 @@ class PreviewTransport extends Transport
         $this->files->put(
             $previewPath.'.eml',
             $this->getEMLPreviewContent($message)
+        );
+*/
+        /*
+         * 2016/06/10 ToshihikoSato
+         * Next sentence creates a text file $previewPath.txt which has only body of message.
+         * getBody() is a method of Swift_Mime_SimpleMimeEntity class which is ancestor of $messae.
+         */
+        $this->files->put(
+            $previewPath.'.txt',
+            $message->getBody()
         );
     }
 
