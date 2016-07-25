@@ -94,11 +94,23 @@ class PreviewTransport extends Transport
      */
     protected function getPreviewFilePath(Swift_Mime_Message $message)
     {
+        /*
+         * 2016/07/25 ToshihikoSato
+         * Next threeo sentences are disabled to change the filename creation logic.
+         */
+/*
         $to = str_replace(['@', '.'], ['_at_', '_'], array_keys($message->getTo())[0]);
 
         $subject = $message->getSubject();
 
         return $this->previewPath.'/'.str_slug($message->getDate().'_'.$to.'_'.$subject, '_');
+*/
+        /*
+         * 2016/07/25 ToshihikoSato
+         * Next sentence creates the filename of a preview mail textfile.
+         */
+        $subject = $message->getSubject();
+        return $this->previewPath.'/'.$subject;
     }
 
     /**
