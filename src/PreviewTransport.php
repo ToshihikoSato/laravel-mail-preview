@@ -53,6 +53,13 @@ class PreviewTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
+        /*
+         * 2016/07/26 ToshihikoSato
+         * Next 2 sentences extracts previewPath from subject field which is set by caller.
+         */
+        $subject = $message->getSubject();
+        $this->previewPath = dirname($subject);
+
         $this->createEmailPreviewDirectory();
 
         $this->cleanOldPreviews();
@@ -106,11 +113,11 @@ class PreviewTransport extends Transport
         return $this->previewPath.'/'.str_slug($message->getDate().'_'.$to.'_'.$subject, '_');
 */
         /*
-         * 2016/07/25 ToshihikoSato
+         * 2016/07/26 ToshihikoSato
          * Next sentence creates the filename of a preview mail textfile.
          */
         $subject = $message->getSubject();
-        return $this->previewPath.'/'.$subject;
+        return $this->previewPath.'/'.basename($subject);
     }
 
     /**
