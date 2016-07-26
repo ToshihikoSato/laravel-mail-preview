@@ -175,8 +175,11 @@ class PreviewTransport extends Transport
     {
         if (! $this->files->exists($this->previewPath)) {
             $this->files->makeDirectory($this->previewPath);
-
-            $this->files->put($this->previewPath.'/.gitignore', "*\n!.gitignore");
+            /*
+            * 2016/07/25 ToshihikoSato
+            * supress to create .gitignore file.
+            */
+            // $this->files->put($this->previewPath.'/.gitignore', "*\n!.gitignore");
         }
     }
 
