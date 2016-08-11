@@ -85,10 +85,15 @@ class PreviewTransport extends Transport
          * 2016/06/10 ToshihikoSato
          * Next sentence creates a text file $previewPath.txt which has only body of message.
          * getBody() is a method of Swift_Mime_SimpleMimeEntity class which is ancestor of $messae.
+         * 
+         * 2016/08/11 ToshihikoSato
+         * Even if there are mixed EOL characters in the body, all the EOL character will be converted to CR+LF.
+         * cf. http://qiita.com/suin/items/cbbbe8844fd734fa20e2
          */
+        $crlfMailBody = preg_replace('/\r\n|\r|\n/', '\r\n', $message->getBody());
         $this->files->put(
             $previewPath.'.txt',
-            $message->getBody()
+            $crlfMailBody
         );
     }
 
