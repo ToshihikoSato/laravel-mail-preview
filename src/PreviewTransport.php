@@ -90,7 +90,7 @@ class PreviewTransport extends Transport
          * Even if there are mixed EOL characters in the body, all the EOL character will be converted to CR+LF.
          * cf. http://qiita.com/suin/items/cbbbe8844fd734fa20e2
          */
-        $crlfMailBody = preg_replace('/\r\n|\r|\n/', '\r\n', $message->getBody());
+        $crlfMailBody = preg_replace("/\r\n|\r|\n/", "\r\n", $message->getBody());
         $this->files->put(
             $previewPath.'.txt',
             $crlfMailBody
