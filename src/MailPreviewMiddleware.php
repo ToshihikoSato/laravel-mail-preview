@@ -18,12 +18,17 @@ class MailPreviewMiddleware
     {
         $response = $next($request);
 
+        /*
+         * 2016/08/12 ToshihikoSato
+         * Next if-block is disabled to supress to add preview link.
+         */
+/*
         if ($response instanceOf Response && $previewPath = $request->session()->get('mail_preview_path')) {
             $this->addLinkToResponse($response, $previewPath);
 
             $request->session()->forget('mail_preview_path');
         }
-
+*/
         return $response;
     }
 
